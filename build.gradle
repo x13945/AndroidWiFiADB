@@ -22,6 +22,10 @@ repositories {
     mavenCentral()
 }
 
+def configPropertiesFile = project.rootProject.file("config.properties");
+def configProperties = new Properties()
+configProperties.load(new FileInputStream(configPropertiesFile))
+
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version = "191.8026.42"
@@ -34,7 +38,7 @@ intellij {
 runIde {
     // Absolute path to installed target 3.5 Android Studio to use as
     // IDE Development Instance (the "Contents" directory is macOS specific):
-    ideDir.set(file("/Users/shaw/Library/Application Support/JetBrains/Toolbox/apps/AndroidStudio/ch-0/203.7583922/Android Studio.app/Contents"))
+    ideDir = new File(configProperties['android_studio_path'])
 }
 
 dependencies {

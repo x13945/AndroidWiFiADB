@@ -4,6 +4,7 @@ out/
 target/
 *.iml
 local.properties
+config.properties
 
 ### Java ###
 *.class
