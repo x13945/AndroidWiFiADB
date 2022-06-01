@@ -49,6 +49,7 @@
 
   </project-components>
 
+  <depends>com.intellij.modules.androidstudio</depends>
   <depends>org.jetbrains.android</depends>
 
   <actions>

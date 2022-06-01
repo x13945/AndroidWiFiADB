@@ -1,11 +1,11 @@
 buildscript {
-  repositories {
-    mavenCentral()
-  }
+    repositories {
+        mavenCentral()
+    }
 }
 
 plugins {
-  id "org.jetbrains.intellij" version "0.0.25"
+    id 'org.jetbrains.intellij' version '1.3.0'
 }
 
 apply plugin: 'org.jetbrains.intellij'
@@ -16,29 +16,37 @@ apply plugin: 'jacoco'
 group 'com.github.pedrovgs'
 version '2.5-SNAPSHOT'
 
-sourceCompatibility = 1.6
+sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
+// See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-  version '14.1.5'
-  pluginName 'AndroidWiFiADB'
-  plugins 'android'
-  updateSinceUntilBuild false
+    version = "191.8026.42"
+    type = "IC"
+    pluginName = 'AndroidWiFiADB'
+    plugins = ['android']
+    updateSinceUntilBuild = false
+}
+
+runIde {
+    // Absolute path to installed target 3.5 Android Studio to use as
+    // IDE Development Instance (the "Contents" directory is macOS specific):
+    ideDir.set(file("/Users/shaw/Library/Application Support/JetBrains/Toolbox/apps/AndroidStudio/ch-0/203.7583922/Android Studio.app/Contents"))
 }
 
 dependencies {
-  compile 'junit:junit:4.12'
-  compile 'org.mockito:mockito-all:1.10.19'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-all:1.10.19'
 }
 
 task checkstyle(type: Checkstyle) {
-  configFile file("${project.rootDir}/config/checkstyle/checkstyle.xml")
-  source 'src'
-  include '**/*.java'
-  exclude '**/gen/**'
+    configFile file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
 
-  classpath = files()
+    classpath = files()
 }
